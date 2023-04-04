@@ -11,6 +11,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Weather App',
+      template: '!!handlebars-loader!./src/index.hbs',
     }),
     // new BundleAnalyzerPlugin(),
   ],
