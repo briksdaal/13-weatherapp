@@ -13,25 +13,27 @@ class WeatherApp {
     if (location) {
       this.location = location;
     }
-    const data = this.getJsonFromApi();
-    const formattedData = WeatherApp.formatData(data);
-    return formattedData;
+
+    return this.getJsonFromApi()
+      .then((rawData) => {
+        // valid data
+        if (!(rawData.error)) {
+          return WeatherApp.formatData(rawData);
+        }
+        // api response error
+        return WeatherApp.apiErrorHandler(rawData);
+      })
+      // fetch error
+      .catch(() => WeatherApp.createErrorObj(1));
   }
 
   getJsonFromApi() {
     return fetch(`http://api.weatherapi.com/v1/forecast.json?key=${this.apiKey}&q=${this.location}&days=8`)
-      .then((response) => response.json())
-      .then((data) => data)
-      .catch((err) => err);
+      .then((response) => response.json());
   }
 
   static formatData(data) {
-    return data
-      .then(WeatherApp.createDataObj);
-  }
-
-  static createDataObj(data) {
-    const weatherObj = {};
+    const weatherObj = { status: 'success' };
     // general data
     weatherObj.name = data.location.name;
     weatherObj.localtime = parse(data.location.localtime, 'yyyy-MM-dd H:mm', new Date());
@@ -88,18 +90,39 @@ class WeatherApp {
     }));
     return weatherObj;
   }
+
+  static apiErrorHandler(errorResponse) {
+    // no matching location error
+    if (errorResponse.error.code === 1006) {
+      return WeatherApp.createErrorObj(2);
+    }
+
+    // other error
+    return WeatherApp.createErrorObj(3, errorResponse.error.message);
+  }
+
+  static createErrorObj(errorCode, errorMsg) {
+    const errorObj = {
+      status: 'failure',
+      errorCode,
+    };
+
+    if (errorCode === 1) {
+      errorObj.error = 'Failed to fetch';
+    } else if (errorCode === 2) {
+      errorObj.error = 'No matching location found';
+    } else {
+      errorObj.error = errorMsg;
+    }
+
+    return errorObj;
+  }
 }
 
 const apiKey = '9de13639f3b0415eb13161241230204';
 const appInst = new WeatherApp(apiKey);
 
-appInst.getJsonFromApi('Budapest')
+appInst.getLocationWeather('Budapest')
   .then((data) => {
-    console.log('1: ');
-    console.log(data);
-  })
-  .then(() => appInst.getLocationWeather('Budapest'))
-  .then((data) => {
-    console.log('2: ');
     console.log(data);
   });
