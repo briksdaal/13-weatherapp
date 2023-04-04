@@ -21,10 +21,10 @@ class WeatherApp {
           return WeatherApp.formatData(rawData);
         }
         // api response error
-        return WeatherApp.apiErrorHandler(rawData);
+        return WeatherApp.errorHandler(rawData);
       })
       // fetch error
-      .catch(() => WeatherApp.createErrorObj(1));
+      .catch((err) => WeatherApp.errorHandler(err));
   }
 
   getJsonFromApi() {
@@ -48,6 +48,7 @@ class WeatherApp {
       condition: {
         text: data.current.condition.text,
         code: data.current.condition.code,
+        icon: data.current.condition.icon,
       },
       maxtemp_c: data.forecast.forecastday[0].day.maxtemp_c,
       maxtemp_f: data.forecast.forecastday[0].day.maxtemp_f,
@@ -58,6 +59,7 @@ class WeatherApp {
     // hourly weather
     const currentHours = getHours(weatherObj.localtime, 0);
     weatherObj.hourly = [...data.forecast.forecastday[0].hour, ...data.forecast.forecastday[1].hour]
+      .slice(currentHours, currentHours + 25)
       .map((hourData) => ({
         temp_c: hourData.temp_c,
         temp_f: hourData.temp_f,
@@ -67,8 +69,7 @@ class WeatherApp {
           code: hourData.condition.code,
         },
         time: parseISO(hourData.time),
-      }))
-      .slice(currentHours, currentHours + 25);
+      }));
     // weekly weather
     weatherObj.weekly = data.forecast.forecastday
       .slice(1)
@@ -86,28 +87,26 @@ class WeatherApp {
     return weatherObj;
   }
 
-  static apiErrorHandler(errorResponse) {
-    // no matching location error
-    if (errorResponse.error.code === 1006) {
-      return WeatherApp.createErrorObj(2);
-    }
-
-    // other error
-    return WeatherApp.createErrorObj(3, errorResponse.error.message);
-  }
-
-  static createErrorObj(errorCode, errorMsg) {
+  static errorHandler(errorResponse) {
     const errorObj = {
       status: 'error',
-      errorCode,
     };
 
-    if (errorCode === 1) {
-      errorObj.error = 'Failed to fetch';
-    } else if (errorCode === 2) {
-      errorObj.error = 'No matching location found';
+    if (errorResponse.error) {
+      errorObj.error = errorResponse.error.message;
+
+      if (errorResponse.error.code === 1006) {
+        // no matching location error
+        errorObj.errorCode = 2;
+      } else {
+        // other error
+        errorObj.errorCode = 3;
+      }
+
+      // fetch error
     } else {
-      errorObj.error = errorMsg;
+      errorObj.error = 'Failed to fetch';
+      errorObj.errorCode = 1;
     }
 
     return errorObj;
