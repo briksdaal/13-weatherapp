@@ -28,7 +28,7 @@ class WeatherApp {
   }
 
   getJsonFromApi() {
-    return fetch(`http://api.weatherapi.com/v1/forecast.json?key=${this.apiKey}&q=${this.location}&days=8`)
+    return fetch(`https://api.weatherapi.com/v1/forecast.json?key=${this.apiKey}&q=${this.location}&days=8`, { mode: 'cors' })
       .then((response) => response.json());
   }
 
