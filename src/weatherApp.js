@@ -6,7 +6,7 @@ import './style.css';
 class WeatherApp {
   constructor(apiKey) {
     this.apiKey = apiKey;
-    this.location = 'London';
+    this.location = 'Tel Aviv';
   }
 
   getLocationWeather(location) {
@@ -48,7 +48,6 @@ class WeatherApp {
       condition: {
         text: data.current.condition.text,
         code: data.current.condition.code,
-        icon: data.current.condition.icon,
       },
       maxtemp_c: data.forecast.forecastday[0].day.maxtemp_c,
       maxtemp_f: data.forecast.forecastday[0].day.maxtemp_f,
@@ -72,7 +71,7 @@ class WeatherApp {
       }));
     // weekly weather
     weatherObj.weekly = data.forecast.forecastday
-      .slice(1)
+      // .slice(1)
       .map((forecastday) => ({
         maxtemp_c: forecastday.day.maxtemp_c,
         maxtemp_f: forecastday.day.maxtemp_f,

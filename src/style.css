@@ -17,3 +17,23 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
+
+.wide-hours-container {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    gap: 20px;
+}
+
+.hour-weather {
+    /* width: 80px; */
+}
+
+.days-container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 20px;
+}
+
+.day-weather {
+    /* width: 200px; */
+}

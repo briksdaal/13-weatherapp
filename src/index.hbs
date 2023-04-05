@@ -16,14 +16,14 @@
         </div>
         <div class="current">
             <h1 class="location-title"></h1>
-            <p class="cur-deg"><span></span>°</p>
+            <p class="cur-deg"></p>
             <h3 class="cur-condition"></h3>
             <div class="cur-hi-lo">
                 <div class="cur-hi">
-                    <p>H: <span class="cur-hi-deg"></span>°</p>
+                    <p>H: <span class="cur-hi-deg"></span></p>
                 </div>
                 <div class="cur-lo">
-                    <p>L: <span class="cur-lo-deg"></span>°</p>
+                    <p>L: <span class="cur-lo-deg"></span></p>
                 </div>
             </div>
             <div class="cur-time">
@@ -39,11 +39,236 @@
       <div class="hourly">
         <h2>Hourly Forecast</h2>
         <div class="slider-container">
-            <div class="wide-hours-container"></div>
+            <div class="wide-hours-container">
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+                <div class="hour-weather">
+                    <p class="hour-time"></p>
+                    <div class="hour-icon"></div>
+                    <p class="hour-deg"></p>
+                </div>
+            </div>
         </div>
       </div>
       <div class="weekly">
         <h2>Weekly Forecast</h2>
+        <div class="days-container">
+            {{!-- .day-weather*8>p.day-name+.day-icon+.day-hi-lo>.day-hi>p{H: }>span.day-hi-deg^^.day-lo>p{L: }>span.day-lo-deg --}}
+            <div class="day-weather">
+                <p class="day-name"></p>
+                <div class="day-icon"></div>
+                <div class="day-hi-lo">
+                    <div class="day-hi">
+                        <p>H: <span class="day-hi-deg"></span></p>
+                    </div>
+                    <div class="day-lo">
+                        <p>L: <span class="day-lo-deg"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="day-weather">
+                <p class="day-name"></p>
+                <div class="day-icon"></div>
+                <div class="day-hi-lo">
+                    <div class="day-hi">
+                        <p>H: <span class="day-hi-deg"></span></p>
+                    </div>
+                    <div class="day-lo">
+                        <p>L: <span class="day-lo-deg"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="day-weather">
+                <p class="day-name"></p>
+                <div class="day-icon"></div>
+                <div class="day-hi-lo">
+                    <div class="day-hi">
+                        <p>H: <span class="day-hi-deg"></span></p>
+                    </div>
+                    <div class="day-lo">
+                        <p>L: <span class="day-lo-deg"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="day-weather">
+                <p class="day-name"></p>
+                <div class="day-icon"></div>
+                <div class="day-hi-lo">
+                    <div class="day-hi">
+                        <p>H: <span class="day-hi-deg"></span></p>
+                    </div>
+                    <div class="day-lo">
+                        <p>L: <span class="day-lo-deg"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="day-weather">
+                <p class="day-name"></p>
+                <div class="day-icon"></div>
+                <div class="day-hi-lo">
+                    <div class="day-hi">
+                        <p>H: <span class="day-hi-deg"></span></p>
+                    </div>
+                    <div class="day-lo">
+                        <p>L: <span class="day-lo-deg"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="day-weather">
+                <p class="day-name"></p>
+                <div class="day-icon"></div>
+                <div class="day-hi-lo">
+                    <div class="day-hi">
+                        <p>H: <span class="day-hi-deg"></span></p>
+                    </div>
+                    <div class="day-lo">
+                        <p>L: <span class="day-lo-deg"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="day-weather">
+                <p class="day-name"></p>
+                <div class="day-icon"></div>
+                <div class="day-hi-lo">
+                    <div class="day-hi">
+                        <p>H: <span class="day-hi-deg"></span></p>
+                    </div>
+                    <div class="day-lo">
+                        <p>L: <span class="day-lo-deg"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="day-weather">
+                <p class="day-name"></p>
+                <div class="day-icon"></div>
+                <div class="day-hi-lo">
+                    <div class="day-hi">
+                        <p>H: <span class="day-hi-deg"></span></p>
+                    </div>
+                    <div class="day-lo">
+                        <p>L: <span class="day-lo-deg"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
       </div>
     </div>
   </body>
