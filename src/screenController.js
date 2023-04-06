@@ -1,5 +1,6 @@
 import format from 'date-fns/format';
 import WeatherApp from './weatherApp';
+import createIcon from './iconGenerator';
 
 class ScreenController {
   constructor() {
@@ -73,7 +74,12 @@ class ScreenController {
       } else {
         hour.time.textContent = format(this.data.hourly[i].time, 'H');
       }
-      hour.icon.textContent = this.data.hourly[i].condition.text;
+      if (hour.icon.firstElementChild) {
+        hour.icon.firstElementChild.remove();
+      }
+      hour.icon.appendChild(
+        createIcon(this.data.hourly[i].condition.code, this.data.hourly[i].is_day),
+      );
     });
 
     // weekly
@@ -83,7 +89,13 @@ class ScreenController {
       } else {
         day.time.textContent = format(this.data.weekly[i].time, 'ccc');
       }
-      day.icon.textContent = this.data.weekly[i].condition.text;
+
+      if (day.icon.firstElementChild) {
+        day.icon.firstElementChild.remove();
+      }
+      day.icon.appendChild(
+        createIcon(this.data.weekly[i].condition.code, true),
+      );
     });
 
     this.populateDegrees();
