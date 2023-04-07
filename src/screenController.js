@@ -1,15 +1,18 @@
 import format from 'date-fns/format';
 import WeatherApp from './weatherApp';
-import createIcon from './iconGenerator';
+import createIcon from './iconMatcher';
+import getBackground from './bgMatcher';
 
 class ScreenController {
   constructor() {
     this.apiKey = '9de13639f3b0415eb13161241230204';
     this.weatherAppInst = new WeatherApp(this.apiKey);
+    this.location = 'Tel Aviv';
     this.data = null;
     this.degreesIn = 'c';
 
     // current selectors
+    this.main = document.querySelector('.main');
     this.locationTitle = document.querySelector('.location-title');
     this.curDeg = document.querySelector('.cur-deg');
     this.curCondition = document.querySelector('.cur-condition');
@@ -46,7 +49,7 @@ class ScreenController {
     this.setEventListeners();
 
     // get London weather on load
-    this.weatherAppInst.getLocationWeather()
+    this.weatherAppInst.getLocationWeather(this.location)
       .then((data) => this.update(data));
   }
 
@@ -59,9 +62,13 @@ class ScreenController {
     console.log(this.data);
     if (this.data.status === 'error') {
       this.errorHandler();
-      return;
+      // return;
     }
     // current
+    this.main.style.backgroundImage = `url(${getBackground(
+      this.data.current.condition.code,
+      this.data.current.is_day,
+    )})`;
     this.locationTitle.textContent = this.data.name;
     this.curCondition.textContent = this.data.current.condition.text;
     this.curHours.textContent = format(this.data.localtime, 'HH:mm');
@@ -130,7 +137,8 @@ class ScreenController {
   setEventListeners() {
     this.submitBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      this.weatherAppInst.getLocationWeather(this.locationInput.value)
+      this.location = this.locationInput.value;
+      this.weatherAppInst.getLocationWeather(this.location)
         .then((data) => this.update(data));
     });
     this.cDegBtn.addEventListener('click', () => {
