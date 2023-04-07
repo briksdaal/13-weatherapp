@@ -1,7 +1,15 @@
 import format from 'date-fns/format';
+import {
+  mdiMagnify,
+  mdiClockTimeEightOutline,
+  mdiCalendarMonthOutline,
+  mdiChevronLeft,
+  mdiChevronRight,
+} from '@mdi/js';
 import WeatherApp from './weatherApp';
 import createIcon from './iconMatcher';
 import getBackground from './bgMatcher';
+import { createSvg } from './utils';
 
 class ScreenController {
   constructor() {
@@ -24,10 +32,14 @@ class ScreenController {
     // hourly selectors
     this.hourlyObj = Array.from(document.querySelectorAll('.hour-weather'))
       .map((hourDiv) => ({
+        container: hourDiv,
         time: hourDiv.querySelector('.hour-time'),
         icon: hourDiv.querySelector('.hour-icon'),
         deg: hourDiv.querySelector('.hour-deg'),
       }));
+    this.hourlyIcon = document.querySelector('.hourly-icon');
+    this.hourlyIcon.appendChild(createSvg(mdiClockTimeEightOutline));
+    this.hourlySliderPosition = 0;
 
     // weekly selectors
     this.weeklyObj = Array.from(document.querySelectorAll('.day-weather'))
@@ -37,6 +49,7 @@ class ScreenController {
         hi: dayDiv.querySelector('.day-hi-deg'),
         lo: dayDiv.querySelector('.day-lo-deg'),
       }));
+    this.weeklyIcon = document.querySelector('.weekly-icon');
 
     // form and button selectors
     this.locationInput = document.querySelector('#location');
@@ -44,6 +57,15 @@ class ScreenController {
 
     this.cDegBtn = document.querySelector('.deg-c-btn');
     this.fDegBtn = document.querySelector('.deg-f-btn');
+
+    this.leftButton = document.querySelector('.left-button');
+    this.rightButton = document.querySelector('.right-button');
+
+    // generate svgs
+    this.weeklyIcon.appendChild(createSvg(mdiCalendarMonthOutline));
+    this.submitBtn.appendChild(createSvg(mdiMagnify));
+    this.leftButton.appendChild(createSvg(mdiChevronLeft));
+    this.rightButton.appendChild(createSvg(mdiChevronRight));
 
     // listeners
     this.setEventListeners();
@@ -110,19 +132,29 @@ class ScreenController {
 
   populateDegrees() {
     // current
-    this.curDeg.textContent = `${this.data.current[`temp_${this.degreesIn}`]}°`;
-    this.curHiDeg.textContent = `${this.data.current[`maxtemp_${this.degreesIn}`]}°`;
-    this.curLoDeg.textContent = `${this.data.current[`mintemp_${this.degreesIn}`]}°`;
+    this.curDeg.textContent = `${this.data.current[`temp_${this.degreesIn}`]}`;
+    this.curHiDeg.textContent = `H: ${this.data.current[`maxtemp_${this.degreesIn}`]}`;
+    this.curLoDeg.textContent = `L: ${this.data.current[`mintemp_${this.degreesIn}`]}`;
 
     // hourly
     this.hourlyObj.forEach((hour, i) => {
-      hour.deg.textContent = `${this.data.hourly[i][`temp_${this.degreesIn}`]}°`;
+      hour.deg.textContent = `${this.data.hourly[i][`temp_${this.degreesIn}`]}`;
     });
 
     // weekly
     this.weeklyObj.forEach((day, i) => {
-      day.hi.textContent = `${this.data.weekly[i][`maxtemp_${this.degreesIn}`]}°`;
-      day.lo.textContent = `${this.data.weekly[i][`mintemp_${this.degreesIn}`]}°`;
+      day.hi.textContent = `H: ${this.data.weekly[i][`maxtemp_${this.degreesIn}`]}`;
+      day.lo.textContent = `L: ${this.data.weekly[i][`mintemp_${this.degreesIn}`]}`;
+    });
+  }
+
+  showEightHours() {
+    this.hourlyObj.forEach((hour, i) => {
+      if (!(i >= this.hourlySliderPosition * 8 && i < (this.hourlySliderPosition + 1) * 8)) {
+        hour.container.classList.add('hidden');
+      } else {
+        hour.container.classList.remove('hidden');
+      }
     });
   }
 
@@ -141,6 +173,7 @@ class ScreenController {
       this.weatherAppInst.getLocationWeather(this.location)
         .then((data) => this.update(data));
     });
+
     this.cDegBtn.addEventListener('click', () => {
       if (this.degreesIn === 'c') {
         return;
@@ -148,12 +181,27 @@ class ScreenController {
       this.degreesIn = 'c';
       this.populateDegrees();
     });
+
     this.fDegBtn.addEventListener('click', () => {
       if (this.degreesIn === 'f') {
         return;
       }
       this.degreesIn = 'f';
       this.populateDegrees();
+    });
+
+    this.leftButton.addEventListener('click', () => {
+      if (this.hourlySliderPosition !== 0) {
+        this.hourlySliderPosition -= 1;
+        this.showEightHours();
+      }
+    });
+
+    this.rightButton.addEventListener('click', () => {
+      if (this.hourlySliderPosition !== 2) {
+        this.hourlySliderPosition += 1;
+        this.showEightHours();
+      }
     });
   }
 }

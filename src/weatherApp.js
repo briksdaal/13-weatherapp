@@ -58,7 +58,7 @@ class WeatherApp {
     // hourly weather
     const currentHours = getHours(weatherObj.localtime, 0);
     weatherObj.hourly = [...data.forecast.forecastday[0].hour, ...data.forecast.forecastday[1].hour]
-      .slice(currentHours, currentHours + 25)
+      .slice(currentHours, currentHours + 24)
       .map((hourData) => ({
         temp_c: hourData.temp_c,
         temp_f: hourData.temp_f,

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+
 :root {
   font-size: 18px;
 }
@@ -6,16 +8,24 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 .main {
+  display: flex;
+  justify-content: center;
   position: relative;
   min-height: 100vh;
+  background-size: cover;
+  background-position: center center;
+}
+
+.content {
+  max-width: 1160px;
+  position: relative;
   padding: 40px;
   display: grid;
   row-gap: 20px;
-  background-size: cover;
-  background-position: center center;
 }
 
 .overlay {
@@ -45,6 +55,159 @@
   fill: #fff;
 }
 
+.search-box {
+  justify-self: start;
+}
+
+.current {
+  width: 250px;
+  padding: 20px;
+  border-radius: 10px;
+  color: #fff;
+  justify-self: center;
+  background: #5050507a;
+  text-align: center;
+}
+
+/* current styles */
+h1 {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.cur-deg {
+  font-size: 3.5rem;
+  font-weight: 300;
+}
+
+.cur-condition {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.cur-time {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.cur-time .hour,
+.cur-time .date {
+  margin-bottom: 8px;
+}
+
+.cur-hi-lo {
+  font-size: 1rem;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.degrees-toggle {
+  justify-self: end;
+}
+
+/* hourly and weekly titles */
+
+.hourly h2,
+.weekly h2 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #ffffff9d;
+  fill: #ffffff9d;
+}
+
+/* hourly styles */
+.hourly-bar {
+  position: relative;
+  display: flex;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.hourly-bar::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: #ffffff27;
+}
+
+.hourly h2 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #ffffff9d;
+  fill: #ffffff9d;
+}
+
+.hourly h2 span {
+  padding-right: 4px;
+}
+
+.hour-buttons {
+  display: flex;
+  margin-right: 16px;
+}
+
+.hour-buttons button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.hours-container {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 20px;
+}
+
+.hour-weather {
+  display: grid;
+  gap: 16px;
+  text-align: center;
+}
+
+.hour-weather.hidden {
+  display: none;
+}
+
+.hour-icon {
+  font-size: 1.5rem;
+}
+
+/* weekly styles */
+.weekly-bar {
+  position: relative;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.weekly-bar::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: #ffffff27;
+}
+
+.weekly h2 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #ffffff9d;
+  fill: #ffffff9d;
+}
+
+.weekly h2 span {
+  padding-right: 4px;
+}
+
 .weekly {
   position: relative;
   align-self: start;
@@ -54,40 +217,58 @@
   color: #fff;
   background: #5050507a;
   fill: #fff;
-}
-
-.search-box {
-  justify-self: start;
-}
-
-.current {
-  padding: 20px;
-  border-radius: 10px;
-  color: #fff;
-  justify-self: center;
-  background: #5050507a;
-}
-
-.degrees-toggle {
-  justify-self: end;
-}
-
-.wide-hours-container {
-  display: grid;
-  grid-template-columns: repeat(13, 1fr);
-  gap: 20px;
-}
-
-.hour-weather {
-  /* width: 80px; */
+  overflow-x: hidden;
 }
 
 .days-container {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 20px;
+  gap: 40px;
 }
 
 .day-weather {
-  /* width: 200px; */
+  position: relative;
+  display: grid;
+  grid-template-columns: 60px 1fr 180px;
+  justify-items: center;
+  align-items: center;
+}
+
+.day-weather::after {
+  position: absolute;
+  left: 0;
+  bottom: -20px;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: #ffffff27;
+}
+
+.day-name {
+  width: 100%;
+  text-align: center;
+}
+
+.day-icon {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.day-hi-lo {
+  width: 100%;
+  font-size: 1rem;
+  display: flex;
+}
+
+.day-hi-deg {
+  margin-right: 50px;
+}
+
+/* degrees ° ::after */
+.degree {
+  position: relative;
+}
+.degree::after {
+  position: absolute;
+  content: "°";
 }

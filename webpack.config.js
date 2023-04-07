@@ -17,7 +17,7 @@ module.exports = {
   ],
   devServer: {
     static: './dist',
-    watchFiles: ['src/**/*.js', 'src/**/*.css'],
+    watchFiles: ['src/**/*.js', 'src/**/*.css', 'src/**/*.hbs'],
   },
   output: {
     filename: 'main.js',
