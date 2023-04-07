@@ -57,6 +57,36 @@
 
 .search-box {
   justify-self: start;
+  align-self: start;
+  padding: 4px;
+  background: #5050507a;
+  border-radius: 10px;
+}
+
+.search-box form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-box input {
+  padding-left: 8px;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.search-box button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  fill: #ffffff9d;
+}
+
+.search-box button:hover {
+  fill: #fff;
 }
 
 .current {
@@ -150,14 +180,20 @@ h1 {
 
 .hour-buttons {
   display: flex;
+  gap: 20px;
   margin-right: 16px;
 }
 
 .hour-buttons button {
+  fill: #ffffff9d;
   background: none;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+.hour-buttons button:hover {
+  fill: #fff;
 }
 
 .hours-container {
