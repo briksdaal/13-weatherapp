@@ -5,6 +5,7 @@ import {
   mdiCalendarMonthOutline,
   mdiChevronLeft,
   mdiChevronRight,
+  mdiAutorenew,
 } from '@mdi/js';
 import WeatherApp from './weatherApp';
 import createIcon from './iconMatcher';
@@ -21,6 +22,8 @@ class ScreenController {
 
     // current selectors
     this.main = document.querySelector('.main');
+    this.currentContainer = document.querySelector('.current-container');
+    this.loading = document.querySelector('.loading');
     this.locationTitle = document.querySelector('.location-title');
     this.curDeg = document.querySelector('.cur-deg');
     this.curCondition = document.querySelector('.cur-condition');
@@ -28,6 +31,11 @@ class ScreenController {
     this.curLoDeg = document.querySelector('.cur-lo-deg');
     this.curHours = document.querySelector('.cur-time .hour');
     this.curDate = document.querySelector('.cur-time .date');
+
+    // loading selectors
+    this.loadingIcon = document.querySelector('.loading-icon');
+
+    // error selectors
 
     // hourly selectors
     this.hourlyObj = Array.from(document.querySelectorAll('.hour-weather'))
@@ -62,6 +70,7 @@ class ScreenController {
     this.rightButton = document.querySelector('.right-button');
 
     // generate svgs
+    this.loadingIcon.appendChild(createSvg(mdiAutorenew));
     this.weeklyIcon.appendChild(createSvg(mdiCalendarMonthOutline));
     this.submitBtn.appendChild(createSvg(mdiMagnify));
     this.leftButton.appendChild(createSvg(mdiChevronLeft));
@@ -70,14 +79,18 @@ class ScreenController {
     // listeners
     this.setEventListeners();
 
-    // get London weather on load
-    this.weatherAppInst.getLocationWeather(this.location)
-      .then((data) => this.update(data));
+    // get Tel Aviv weather on load
+    this.update();
   }
 
-  update(data) {
-    this.data = data;
-    this.populateScreen();
+  update() {
+    this.weatherAppInst.getLocationWeather(this.location)
+      .then((data) => {
+        this.data = data;
+        this.populateScreen();
+        this.main.classList.remove('Loading');
+      });
+    this.main.classList.add('Loading');
   }
 
   populateScreen() {
@@ -170,8 +183,7 @@ class ScreenController {
     this.submitBtn.addEventListener('click', (e) => {
       e.preventDefault();
       this.location = this.locationInput.value;
-      this.weatherAppInst.getLocationWeather(this.location)
-        .then((data) => this.update(data));
+      this.update();
     });
 
     this.cDegBtn.addEventListener('click', () => {

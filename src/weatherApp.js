@@ -39,20 +39,20 @@ class WeatherApp {
     weatherObj.localtime = parse(data.location.localtime, 'yyyy-MM-dd H:mm', new Date());
     // current weather
     weatherObj.current = {
-      temp_c: data.current.temp_c,
-      temp_f: data.current.temp_f,
-      feelslike_c: data.current.feelslike_c,
-      feelslike_f: data.current.feelslike_f,
+      temp_c: Math.round(data.current.temp_c),
+      temp_f: Math.round(data.current.temp_f),
+      feelslike_c: Math.round(data.current.feelslike_c),
+      feelslike_f: Math.round(data.current.feelslike_f),
       is_day: data.current.is_day === 1,
       humidity: data.current.humidity,
       condition: {
         text: data.current.condition.text,
         code: data.current.condition.code,
       },
-      maxtemp_c: data.forecast.forecastday[0].day.maxtemp_c,
-      maxtemp_f: data.forecast.forecastday[0].day.maxtemp_f,
-      mintemp_c: data.forecast.forecastday[0].day.mintemp_c,
-      mintemp_f: data.forecast.forecastday[0].day.mintemp_f,
+      maxtemp_c: Math.round(data.forecast.forecastday[0].day.maxtemp_c),
+      maxtemp_f: Math.round(data.forecast.forecastday[0].day.maxtemp_f),
+      mintemp_c: Math.round(data.forecast.forecastday[0].day.mintemp_c),
+      mintemp_f: Math.round(data.forecast.forecastday[0].day.mintemp_f),
 
     };
     // hourly weather
@@ -60,8 +60,8 @@ class WeatherApp {
     weatherObj.hourly = [...data.forecast.forecastday[0].hour, ...data.forecast.forecastday[1].hour]
       .slice(currentHours, currentHours + 24)
       .map((hourData) => ({
-        temp_c: hourData.temp_c,
-        temp_f: hourData.temp_f,
+        temp_c: Math.round(hourData.temp_c),
+        temp_f: Math.round(hourData.temp_f),
         is_day: hourData.is_day === 1,
         condition: {
           text: hourData.condition.text,
@@ -73,10 +73,10 @@ class WeatherApp {
     weatherObj.weekly = data.forecast.forecastday
       // .slice(1)
       .map((forecastday) => ({
-        maxtemp_c: forecastday.day.maxtemp_c.toFixed(1),
-        maxtemp_f: forecastday.day.maxtemp_f.toFixed(1),
-        mintemp_c: forecastday.day.mintemp_c.toFixed(1),
-        mintemp_f: forecastday.day.mintemp_f.toFixed(1),
+        maxtemp_c: Math.round(forecastday.day.maxtemp_c),
+        maxtemp_f: Math.round(forecastday.day.maxtemp_f),
+        mintemp_c: Math.round(forecastday.day.mintemp_c),
+        mintemp_f: Math.round(forecastday.day.mintemp_f),
         condition: {
           text: forecastday.day.condition.text,
           code: forecastday.day.condition.code,
