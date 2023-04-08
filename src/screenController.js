@@ -179,6 +179,8 @@ class ScreenController {
         return;
       }
       this.degreesIn = 'c';
+      this.cDegBtn.classList.remove('inactive');
+      this.fDegBtn.classList.add('inactive');
       this.populateDegrees();
     });
 
@@ -187,20 +189,30 @@ class ScreenController {
         return;
       }
       this.degreesIn = 'f';
+      this.cDegBtn.classList.add('inactive');
+      this.fDegBtn.classList.remove('inactive');
       this.populateDegrees();
     });
 
     this.leftButton.addEventListener('click', () => {
+      this.rightButton.classList.remove('inactive');
       if (this.hourlySliderPosition !== 0) {
         this.hourlySliderPosition -= 1;
         this.showEightHours();
+        if (this.hourlySliderPosition === 0) {
+          this.leftButton.classList.add('inactive');
+        }
       }
     });
 
     this.rightButton.addEventListener('click', () => {
+      this.leftButton.classList.remove('inactive');
       if (this.hourlySliderPosition !== 2) {
         this.hourlySliderPosition += 1;
         this.showEightHours();
+        if (this.hourlySliderPosition === 2) {
+          this.rightButton.classList.add('inactive');
+        }
       }
     });
   }

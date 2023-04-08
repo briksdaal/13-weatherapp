@@ -33,7 +33,7 @@
   z-index: 0;
   width: 100%;
   height: 100%;
-  background: #a7a7a72e;
+  background: #a7a7a758;
 }
 
 .top {
@@ -83,6 +83,7 @@
   border: none;
   font-size: 1.5rem;
   fill: #ffffff9d;
+  cursor: pointer;
 }
 
 .search-box button:hover {
@@ -134,8 +135,32 @@ h1 {
   gap: 20px;
 }
 
+/* degree toggle box */
+
 .degrees-toggle {
+  display: flex;
+  gap: 16px;
+  padding: 8px;
+  background: #5050507a;
+  border-radius: 10px;
   justify-self: end;
+  align-self: start;
+}
+
+.degrees-toggle button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.degrees-toggle button.inactive {
+  color: #ffffff9d;
+}
+
+.degrees-toggle button:hover {
+  color: #fff;
 }
 
 /* hourly and weekly titles */
@@ -194,6 +219,10 @@ h1 {
 
 .hour-buttons button:hover {
   fill: #fff;
+}
+
+.hour-buttons button.inactive:hover {
+  fill: #ffffff9d;
 }
 
 .hours-container {
@@ -269,7 +298,7 @@ h1 {
   align-items: center;
 }
 
-.day-weather::after {
+.day-weather:not(.day-weather:last-of-type)::after {
   position: absolute;
   left: 0;
   bottom: -20px;

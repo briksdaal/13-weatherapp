@@ -73,10 +73,10 @@ class WeatherApp {
     weatherObj.weekly = data.forecast.forecastday
       // .slice(1)
       .map((forecastday) => ({
-        maxtemp_c: forecastday.day.maxtemp_c,
-        maxtemp_f: forecastday.day.maxtemp_f,
-        mintemp_c: forecastday.day.mintemp_c,
-        mintemp_f: forecastday.day.mintemp_f,
+        maxtemp_c: forecastday.day.maxtemp_c.toFixed(1),
+        maxtemp_f: forecastday.day.maxtemp_f.toFixed(1),
+        mintemp_c: forecastday.day.mintemp_c.toFixed(1),
+        mintemp_f: forecastday.day.mintemp_f.toFixed(1),
         condition: {
           text: forecastday.day.condition.text,
           code: forecastday.day.condition.code,
