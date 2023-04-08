@@ -36,6 +36,8 @@ class ScreenController {
     this.loadingIcon = document.querySelector('.loading-icon');
 
     // error selectors
+    this.errorCode = document.querySelector('.error-code');
+    this.errorMsg = document.querySelector('.error-msg');
 
     // hourly selectors
     this.hourlyObj = Array.from(document.querySelectorAll('.hour-weather'))
@@ -76,6 +78,10 @@ class ScreenController {
     this.leftButton.appendChild(createSvg(mdiChevronLeft));
     this.rightButton.appendChild(createSvg(mdiChevronRight));
 
+    // set 'sunny' background as default
+
+    this.main.style.backgroundImage = `url(${getBackground()})`;
+
     // listeners
     this.setEventListeners();
 
@@ -84,21 +90,21 @@ class ScreenController {
   }
 
   update() {
+    this.main.classList.remove('error');
     this.weatherAppInst.getLocationWeather(this.location)
       .then((data) => {
         this.data = data;
-        this.populateScreen();
-        this.main.classList.remove('Loading');
+        this.main.classList.remove('loading');
+        if (this.data.status === 'success') {
+          this.populateScreen();
+        } else if (this.data.status === 'error') {
+          this.errorHandler();
+        }
       });
-    this.main.classList.add('Loading');
+    this.main.classList.add('loading');
   }
 
   populateScreen() {
-    console.log(this.data);
-    if (this.data.status === 'error') {
-      this.errorHandler();
-      // return;
-    }
     // current
     this.main.style.backgroundImage = `url(${getBackground(
       this.data.current.condition.code,
@@ -177,6 +183,9 @@ class ScreenController {
 
   errorHandler() {
     console.log(this.data);
+    this.main.classList.add('error');
+    this.errorCode.textContent = `Code: ${this.data.errorCode}`;
+    this.errorMsg.textContent = this.data.error;
   }
 
   setEventListeners() {

@@ -41,10 +41,7 @@ class WeatherApp {
     weatherObj.current = {
       temp_c: Math.round(data.current.temp_c),
       temp_f: Math.round(data.current.temp_f),
-      feelslike_c: Math.round(data.current.feelslike_c),
-      feelslike_f: Math.round(data.current.feelslike_f),
       is_day: data.current.is_day === 1,
-      humidity: data.current.humidity,
       condition: {
         text: data.current.condition.text,
         code: data.current.condition.code,

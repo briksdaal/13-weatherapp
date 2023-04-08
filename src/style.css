@@ -36,6 +36,7 @@
   background: #a7a7a72f;
 }
 
+/* top bar styles (search box, current, and degree toggle buttons */
 .top {
   position: relative;
   align-self: start;
@@ -44,6 +45,7 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+/* search box styles*/
 .search-box {
   justify-self: start;
   align-self: start;
@@ -86,7 +88,7 @@
 /* current styles */
 .current {
   width: 250px;
-  height: 250px;
+  min-height: 250px;
   padding: 20px;
   border-radius: 10px;
   color: #fff;
@@ -158,6 +160,15 @@ h1 {
 }
 
 /* hourly and weekly titles */
+.hourly h2,
+.weekly h2 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #ffffff9d;
+  fill: #ffffff9d;
+}
+
+/* hourly styles */
 .hourly {
   position: relative;
   height: 208px;
@@ -170,15 +181,6 @@ h1 {
   fill: #fff;
 }
 
-.hourly h2,
-.weekly h2 {
-  font-size: 1rem;
-  font-weight: 400;
-  color: #ffffff9d;
-  fill: #ffffff9d;
-}
-
-/* hourly styles */
 .hourly-bar {
   position: relative;
   display: flex;
@@ -344,7 +346,7 @@ h1 {
   content: "°";
 }
 
-/* Loading and error styles */
+/* loading styles */
 .loading-container {
   height: 100%;
   display: none;
@@ -380,9 +382,14 @@ h1 {
   font-size: 2rem;
 }
 
-/* Error styles */
+/* error styles */
 .error-container {
+  height: 100%;
   display: none;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
 }
 
 .main.error .current-container,
@@ -392,5 +399,9 @@ h1 {
 }
 
 .main.error .error-container {
-  display: block;
+  display: flex;
+}
+
+.error-title {
+  font-size: 2rem;
 }

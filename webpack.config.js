@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   optimization: {
     usedExports: true,
   },
@@ -13,7 +13,7 @@ module.exports = {
       title: 'Weather App',
       template: '!!handlebars-loader!./src/index.hbs',
     }),
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
   ],
   devServer: {
     static: './dist',
