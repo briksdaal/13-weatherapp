@@ -6,6 +6,7 @@ import {
   mdiChevronLeft,
   mdiChevronRight,
   mdiAutorenew,
+  mdiGithub,
 } from '@mdi/js';
 import WeatherApp from './weatherApp';
 import createIcon from './iconMatcher';
@@ -71,15 +72,20 @@ class ScreenController {
     this.leftButton = document.querySelector('.left-button');
     this.rightButton = document.querySelector('.right-button');
 
+    // generate footer content
+    this.footerText = document.querySelector('.footer-text');
+    this.footerText.textContent = `Copyright © ${new Date().getFullYear()} Briksdaal`;
+    this.footerLink = document.querySelector('.footer-link');
+
     // generate svgs
     this.loadingIcon.appendChild(createSvg(mdiAutorenew));
     this.weeklyIcon.appendChild(createSvg(mdiCalendarMonthOutline));
     this.submitBtn.appendChild(createSvg(mdiMagnify));
     this.leftButton.appendChild(createSvg(mdiChevronLeft));
     this.rightButton.appendChild(createSvg(mdiChevronRight));
+    this.footerLink.appendChild(createSvg(mdiGithub));
 
     // set 'sunny' background as default
-
     this.main.style.backgroundImage = `url(${getBackground()})`;
 
     // listeners
