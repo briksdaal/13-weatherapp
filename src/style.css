@@ -428,4 +428,57 @@ h1 {
   fill: #fff;
 }
 
+@media only screen and (max-width: 900px) {
+  .top {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 
+  .search-box {
+    grid-row: 1 / 2;
+  }
+
+  .current {
+    width: 100%;
+    grid-row: 3 / 4;
+  }
+
+  .degrees-toggle {
+    grid-row: 2 / 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hourly {
+    height: unset;
+  }
+
+  .hour-buttons {
+    margin-left: 8px;
+    margin-right: 0;
+}
+
+  .hours-container {
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 8px;
+    row-gap: 48px;
+  }
+
+  .weekly {
+    height: unset;
+  }
+
+  .day-weather {
+    grid-template-columns: repeat(2, auto);
+    row-gap: 16px;
+  }
+
+  .day-hi-lo {
+    grid-column: 1 / 3;
+    width: unset;
+  }
+  
+  .day-hi-deg {
+      margin-right: 100px;
+  }
+}
