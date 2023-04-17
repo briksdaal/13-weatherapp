@@ -257,7 +257,6 @@ h1 {
 /* weekly styles */
 .weekly {
   position: relative;
-  height: 600px;
   align-self: start;
   z-index: 10;
   padding: 20px;
@@ -418,6 +417,7 @@ h1 {
   background: #5050507a;
   color: #fff;
   font-size: 0.9rem;
+  align-self: flex-end;
 }
 
 .footer-text {
@@ -463,10 +463,6 @@ h1 {
     grid-template-columns: repeat(4, 1fr);
     column-gap: 8px;
     row-gap: 48px;
-  }
-
-  .weekly {
-    height: unset;
   }
 
   .day-weather {

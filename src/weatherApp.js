@@ -18,6 +18,7 @@ class WeatherApp {
       .then((rawData) => {
         // valid data
         if (!(rawData.error)) {
+          console.log(rawData);
           return WeatherApp.formatData(rawData);
         }
         // api response error
@@ -28,7 +29,7 @@ class WeatherApp {
   }
 
   getJsonFromApi() {
-    return fetch(`https://api.weatherapi.com/v1/forecast.json?key=${this.apiKey}&q=${this.location}&days=8`, { mode: 'cors' })
+    return fetch(`https://api.weatherapi.com/v1/forecast.json?key=${this.apiKey}&q=${this.location}&days=4`, { mode: 'cors' })
       .then((response) => response.json());
   }
 
