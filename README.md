@@ -1,6 +1,15 @@
-Odin Weather App Assignment
+# Weather App
+A live weather app using vanilla javascript and a public weather API
 
-Build a weather app
+Available at:
+https://briksdaal.github.io/13-weatherapp/
 
-Receive a location form the client, make an async API call to receive location's weather,
-format the response, and present the data visually.
+## Description
+- Provides live weather updates for searched locations
+- Shows hourly forecast for the upcoming 24 hours, and a next 2 days daily forecast
+- Weather icons and backgrounds change dynamically, according to location's current weather
+
+## Specification
+- Built with vanilla javascript and promises
+- Fetches data from weatherapi.com
+- Designed and modeled after the Apple iOS weather app
